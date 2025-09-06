@@ -56,3 +56,10 @@ interface Feedback {
     }[];
   };
 }
+
+interface resumeType {
+  companyName:string,
+  jobTitle:string
+  jobDescription :string
+  file: File
+}
