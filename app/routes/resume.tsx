@@ -16,7 +16,7 @@ export const meta = () => [
 const resume = () => {
   const { auth, isLoading, fs, kv } = usePuterStore();
   const { id } = useParams();
-                                  z
+                                  
   const [imageUrl, setImageUrl] = useState("");
   const [resumeUrl, setResumeUrl] = useState("");
   const [feedback, setFeedback] = useState<Feedback | null>(null);
@@ -87,7 +87,7 @@ const resume = () => {
               Summary ATS details
 
               <Summary feedback={feedback}/>
-              <Ats score={feedback.ATS.score || 0} suggestions={feedback.padStart.tips || []}/>
+              <Ats score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []}/>
               <Details feedback={feedback}/>
             </div>
           ) : (
