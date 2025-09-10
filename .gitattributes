@@ -1,0 +1,11 @@
+# Tell GitHub Linguist to count these as TypeScript
+*.ts linguist-language=TypeScript
+*.tsx linguist-language=TypeScript
+
+# Ignore lock files and dependencies for language stats
+package-lock.json linguist-vendored
+pnpm-lock.yaml linguist-vendored
+yarn.lock linguist-vendored
+public/* linguist-vendored
+dist/* linguist-vendored
+build/* linguist-vendored
