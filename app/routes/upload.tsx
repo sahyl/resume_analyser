@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { generateUUID } from "~/lib/utils";
 import { convertPdfToImage } from "~/lib/pdfToImage";
 import { prepareInstructions } from "~/constants";
-import { safeParseAIJSON } from "~/lib/SafeJson";
+import { safeParseAIJSON } from "~/lib/safeJson";
 
 const Upload = () => {
   const { auth, isLoading, fs, ai, kv } = usePuterStore();
