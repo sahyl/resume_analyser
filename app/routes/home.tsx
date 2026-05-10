@@ -55,7 +55,7 @@ export default function Home() {
             <h2>No resumes found . Upload your resume to find get feedback</h2>
           ):(
             <h2>
-              Review your submissions and chec AI-powered feedback.
+              Review your submissions and get AI-powered feedback.
             </h2>
           )}
         </div>
