@@ -60,22 +60,42 @@ const Upload = () => {
 
     setStatusText("Analyzing...");
 
-    const feedback = await ai.feedback(
-      uploadedFile.path,
-      prepareInstructions({ jobTitle, jobDescription })
-    );
-    if (!feedback) return setStatusText("Error: Failed to analyze resume");
+    try {
+  const feedback = await ai.feedback(
+    uploadedFile.path,
+    prepareInstructions({ jobTitle, jobDescription })
+  );
 
-    const feedbackText =
-      typeof feedback.message.content === "string"
-        ? feedback.message.content
-        : feedback.message.content[0].text;
+  if (!feedback) {
+    setStatusText("Error: Failed to analyze resume");
+    return;
+  }
 
-    data.feedback = safeParseAIJSON(feedbackText);
-    await kv.set(`resume:${uuid}`, JSON.stringify(data));
-    setStatusText("Analysis complete, redirecting...");
-    console.log(data);
-    navigate(`/resume/${uuid}`);
+  console.log("RAW AI RESPONSE:", feedback);
+
+  const feedbackText =
+    typeof feedback.message.content === "string"
+      ? feedback.message.content
+      : feedback.message.content[0].text;
+
+  console.log("RAW TEXT:", feedbackText);
+
+  data.feedback = safeParseAIJSON(feedbackText);
+
+  await kv.set(`resume:${uuid}`, JSON.stringify(data));
+
+  setStatusText("Analysis complete, redirecting...");
+
+  navigate(`/resume/${uuid}`);
+} catch (err) {
+  console.error(err);
+
+  setStatusText(
+    err instanceof Error
+      ? `Error: ${err.message}`
+      : "Error parsing AI response"
+  );
+}
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
